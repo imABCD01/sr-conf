@@ -1,5 +1,7 @@
 /*
- * sr-health v1.1 — Shadowrocket 内置链路自检（type=cron，每 10 分钟）
+ * sr-health v1.2 — Shadowrocket 内置链路自检（type=cron，每 10 分钟）
+ * v1.2（2026-10-31）：新增「Rex 模块源 jsdelivr」链路——首页 15 模块/徽章/图标全在
+ * cdn.jsdelivr.net（v3.7 已加 DIRECT 直连规则），用真实合集资源探测，兼验内容层。
  * 通知策略（v1.1 降噪）：
  *   1) 同一异常需连续 2 轮（约 20 分钟）确认才通知——过滤瞬时抖动；
  *   2) 全部链路失败（网络级瘫痪）跳过确认立即通知；
@@ -10,7 +12,8 @@ const TESTS = [
   { name: '代理链路', url: 'https://www.gstatic.com/generate_204' },
   { name: 'PikPak WebDAV', url: 'https://dav.pikpak.ai/' },
   { name: 'TestFlight', url: 'https://testflight.apple.com' },
-  { name: 'PikPak API', url: 'https://www.mypikpak.com/' }
+  { name: 'PikPak API', url: 'https://www.mypikpak.com/' },
+  { name: 'Rex模块源', url: 'https://cdn.jsdelivr.net/gh/imABCD01/rex-icons@main/all-modules.rex' }
 ];
 const K_LAST_SIG = 'sr_h_last_sig';      // 上次已通知签名
 const K_LAST_TS = 'sr_h_last_ts';        // 上次已通知时间
